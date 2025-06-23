@@ -459,6 +459,48 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#4-arquitetura-de-software-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Arquitetura de Software (Backend)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Arquitetura de Software (Backend)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Visão Geral
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-diagrama-de-arquitetura-de-software-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Diagrama de Arquitetura de Software (Backend)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-camadas-da-arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Camadas da Arquitetura
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -612,6 +654,48 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#4-arquitetura-de-software-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Arquitetura de Software (Backend)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Arquitetura de Software (Backend)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Visão Geral
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-diagrama-de-arquitetura-de-software-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Diagrama de Arquitetura de Software (Backend)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-camadas-da-arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Camadas da Arquitetura
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -658,6 +742,12 @@
 <td>Adiciona referencia aos módulos backend</td>
 <td><a href="https://github.com/Maelton">Maelton Lima dos Santos</a></td>
 </tr>
+<tr>
+<td>22/06/2025</td>
+<td>0.6</td>
+<td>Adiciona arquitetura de software backend</td>
+<td><a href="https://github.com/Maelton">Maelton Lima dos Santos</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="2-visao-geral">2. Visão Geral</h2>
@@ -679,9 +769,47 @@
 <li><a href="../modules/audit-module/"><strong>AuditModule</strong></a>: registro de ações críticas</li>
 <li><a href="../modules/dashboard-module/"><strong>DashboardModule</strong></a>: indicadores gráficos e filtros</li>
 </ul>
-<!-- ## 4. Modelo Entidade Relacionamento -->
+<h2 id="4-arquitetura-de-software-backend">4. Arquitetura de Software (Backend)</h2>
+<h3 id="41-visao-geral">4.1 Visão Geral</h3>
+<p>O backend do sistema BRISA Helpdesk seguirá o padrão arquitetural <strong>Layered Architecture</strong> (Arquitetura em Camadas), conforme descrito no livro <a href="https://www.oreilly.com/library/view/software-architecture-patterns/9781491971437/ch01.html">"Software Architecture Patterns" (O'Reilly)</a>.</p>
+<h3 id="42-diagrama-de-arquitetura-de-software-backend">4.2 Diagrama de Arquitetura de Software (Backend)</h3>
+<p><a href="../images/backend-software-architecture.drawio.svg"><img alt="" src="../images/backend-software-architecture.drawio.svg" /></a></p>
+<h3 id="43-camadas-da-arquitetura">4.3 Camadas da Arquitetura</h3>
+<p>Esta abordagem organiza o código em quatro camadas principais, cada uma com responsabilidades bem definidas e limites claros.</p>
+<table>
+<thead>
+<tr>
+<th>Camada</th>
+<th>Responsabilidades Principais</th>
+<th>Exemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Presentation Layer</strong></td>
+<td>Lida com entrada/saída de dados, recebe requisições HTTP, valida dados, mapeia DTOs e delega para a camada de negócio.</td>
+<td><code>user.controller.ts</code>, <code>user-create-update.dto.ts</code></td>
+</tr>
+<tr>
+<td><strong>Business Layer</strong></td>
+<td>Contém a lógica de negócio central do sistema, orquestrando regras, fluxos e validações complexas.</td>
+<td><code>user.service.ts</code>, <code>user-not-found.exception.ts</code></td>
+</tr>
+<tr>
+<td><strong>Persistence Layer</strong></td>
+<td>É o código da sua aplicação que se comunica com o Database Layer. É responsável por consultar, salvar, atualizar e deletar dados, independentemente de qual tecnologia de banco está por trás (ORM, JDBC, Prisma, etc.).</td>
+<td><code>user.repository.ts</code>, <code>prisma.service.ts</code></td>
+</tr>
+<tr>
+<td><strong>Database Layer</strong></td>
+<td>Infraestrutura de armazenamento físico e persistente. Inclui bancos de dados relacionais (PostgreSQL), não relacionais (Redis) e armazenamentos de objetos (ex.: Firebase Storage, AWS S3).</td>
+<td>PostgreSQL, Redis, Firebase</td>
+</tr>
+</tbody>
+</table>
+<!-- ## 5. Modelo Entidade Relacionamento -->
 
-<!-- ## 5. Diagrama de Classes -->
+<!-- ## 6. Diagrama de Classes -->
 
 
 
