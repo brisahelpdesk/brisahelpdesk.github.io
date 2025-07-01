@@ -1,0 +1,2062 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../naming-convetions/">
+      
+      
+      
+      <link rel="icon" href="../../../images/logo-2.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Documento de modelo relacional - BRISA Helpdesk</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#documentacao-de-modelagem-relacional-de-banco-de-dados" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="BRISA Helpdesk" class="md-header__button md-logo" aria-label="BRISA Helpdesk" data-md-component="logo">
+      
+  <img src="../../../images/logo-2.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BRISA Helpdesk
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Documento de modelo relacional
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="BRISA Helpdesk" class="md-nav__button md-logo" aria-label="BRISA Helpdesk" data-md-component="logo">
+      
+  <img src="../../../images/logo-2.png" alt="logo">
+
+    </a>
+    BRISA Helpdesk
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Início
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Iniciação
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Iniciação
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../initiation/project-charter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documento de abetura
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Planejamento
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Planejamento
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tech-stack/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documento de ferramentas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../requirements-agile-catalog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documento de requisitos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../system-architecture/system-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documento de arquitetura
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Documentos de processos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Documentos de processos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../system-processes/create-new-client/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Processo de criação de cliente
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Documentos de banco de dados
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Documentos de banco de dados
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../naming-convetions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Padrão de nomenclatura
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Documento de modelo relacional
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documento de modelo relacional
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#versoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versões
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Descrição
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelagem-completa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modelagem Completa
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principais-modulos-da-aplicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principais Módulos da Aplicação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Principais Módulos da Aplicação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-gerenciamento-de-autenticacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 Gerenciamento de Autenticação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Gerenciamento de Autenticação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-gerenciamento-de-produtos" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 Gerenciamento de Produtos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Gerenciamento de Produtos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-gerenciamento-de-clientes" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 Gerenciamento de Clientes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Gerenciamento de Clientes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-gerenciamento-de-colaboradores" class="md-nav__link">
+    <span class="md-ellipsis">
+      4 Gerenciamento de Colaboradores
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Gerenciamento de Colaboradores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-gerenciamento-de-contratos" class="md-nav__link">
+    <span class="md-ellipsis">
+      5 Gerenciamento de Contratos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Gerenciamento de Contratos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-gerenciamento-de-slas" class="md-nav__link">
+    <span class="md-ellipsis">
+      6 Gerenciamento de SLAs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 Gerenciamento de SLAs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-gerenciamento-de-chamados" class="md-nav__link">
+    <span class="md-ellipsis">
+      7 Gerenciamento de Chamados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7 Gerenciamento de Chamados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-gerenciamento-de-chats" class="md-nav__link">
+    <span class="md-ellipsis">
+      8 Gerenciamento de Chats
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8 Gerenciamento de Chats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-gerenciamento-de-base-de-conhecimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      9 Gerenciamento de Base de Conhecimento
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9 Gerenciamento de Base de Conhecimento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-gerenciamento-de-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      10 Gerenciamento de Feedback
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10 Gerenciamento de Feedback">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-gerenciamento-de-auditoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      11 Gerenciamento de Auditoria
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11 Gerenciamento de Auditoria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#versoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versões
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Descrição
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modelagem-completa" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modelagem Completa
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#principais-modulos-da-aplicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Principais Módulos da Aplicação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Principais Módulos da Aplicação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-gerenciamento-de-autenticacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      1 Gerenciamento de Autenticação
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Gerenciamento de Autenticação">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-gerenciamento-de-produtos" class="md-nav__link">
+    <span class="md-ellipsis">
+      2 Gerenciamento de Produtos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Gerenciamento de Produtos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-gerenciamento-de-clientes" class="md-nav__link">
+    <span class="md-ellipsis">
+      3 Gerenciamento de Clientes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Gerenciamento de Clientes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-gerenciamento-de-colaboradores" class="md-nav__link">
+    <span class="md-ellipsis">
+      4 Gerenciamento de Colaboradores
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Gerenciamento de Colaboradores">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-gerenciamento-de-contratos" class="md-nav__link">
+    <span class="md-ellipsis">
+      5 Gerenciamento de Contratos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Gerenciamento de Contratos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-gerenciamento-de-slas" class="md-nav__link">
+    <span class="md-ellipsis">
+      6 Gerenciamento de SLAs
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6 Gerenciamento de SLAs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-gerenciamento-de-chamados" class="md-nav__link">
+    <span class="md-ellipsis">
+      7 Gerenciamento de Chamados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7 Gerenciamento de Chamados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-gerenciamento-de-chats" class="md-nav__link">
+    <span class="md-ellipsis">
+      8 Gerenciamento de Chats
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8 Gerenciamento de Chats">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#9-gerenciamento-de-base-de-conhecimento" class="md-nav__link">
+    <span class="md-ellipsis">
+      9 Gerenciamento de Base de Conhecimento
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9 Gerenciamento de Base de Conhecimento">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-gerenciamento-de-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      10 Gerenciamento de Feedback
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10 Gerenciamento de Feedback">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#103-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-gerenciamento-de-auditoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      11 Gerenciamento de Auditoria
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11 Gerenciamento de Auditoria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-modelo-conceitual" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.1 Modelo Conceitual
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-descricao" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.2 Descrição
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-modelo-relacional" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.3 Modelo Relacional
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="documentacao-de-modelagem-relacional-de-banco-de-dados">Documentação de Modelagem Relacional de Banco de Dados</h1>
+<h2 id="versoes">Versões</h2>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Versão</th>
+<th>Descrição</th>
+<th>Responsáveis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>28/06/2025</td>
+<td>0.1</td>
+<td>Criação do documento</td>
+<td><a href="https://github.com/Maelton">Maelton Lima dos Santos</a></td>
+</tr>
+<tr>
+<td>30/06/2025</td>
+<td>0.2</td>
+<td>Adiciona estrutura do documento</td>
+<td><a href="https://github.com/Maelton">Maelton Lima dos Santos</a></td>
+</tr>
+<tr>
+<td>30/06/2025</td>
+<td>0.3</td>
+<td>Adiciona gerenciamento de autenticacao</td>
+<td><a href="https://github.com/Maelton">Maelton Lima dos Santos</a></td>
+</tr>
+<tr>
+<td>30/06/2025</td>
+<td>0.4</td>
+<td>Adiciona gerenciamento de produtos</td>
+<td><a href="https://github.com/Maelton">Maelton Lima dos Santos</a></td>
+</tr>
+<tr>
+<td>30/06/2025</td>
+<td>0.5</td>
+<td>Adiciona gerenciamento de clientes</td>
+<td><a href="https://github.com/Maelton">Maelton Lima dos Santos</a></td>
+</tr>
+<tr>
+<td>01/07/2025</td>
+<td>0.6</td>
+<td>Adiciona gerenciamento de colaboradores</td>
+<td><a href="https://github.com/Maelton">Maelton Lima dos Santos</a></td>
+</tr>
+<tr>
+<td>01/07/2025</td>
+<td>0.7</td>
+<td>Adiciona gerenciamento de contratos</td>
+<td><a href="https://github.com/Maelton">Maelton Lima dos Santos</a></td>
+</tr>
+<tr>
+<td>01/07/2025</td>
+<td>0.8</td>
+<td>Adiciona gerenciamento de slas</td>
+<td><a href="https://github.com/Maelton">Maelton Lima dos Santos</a></td>
+</tr>
+<tr>
+<td>01/07/2025</td>
+<td>0.9</td>
+<td>Adiciona gerenciamento de chamados</td>
+<td><a href="https://github.com/Maelton">Maelton Lima dos Santos</a></td>
+</tr>
+<tr>
+<td>01/07/2025</td>
+<td>0.10</td>
+<td>Adiciona gerenciamento de chat</td>
+<td><a href="https://github.com/Maelton">Maelton Lima dos Santos</a></td>
+</tr>
+<tr>
+<td>01/07/2025</td>
+<td>0.11</td>
+<td>Adiciona gerenciamento de faq</td>
+<td><a href="https://github.com/Maelton">Maelton Lima dos Santos</a></td>
+</tr>
+<tr>
+<td>01/07/2025</td>
+<td>0.12</td>
+<td>Adiciona gerenciamento de feedback</td>
+<td><a href="https://github.com/Maelton">Maelton Lima dos Santos</a></td>
+</tr>
+<tr>
+<td>01/07/2025</td>
+<td>0.13</td>
+<td>Adiciona gerenciamento de audit</td>
+<td><a href="https://github.com/Maelton">Maelton Lima dos Santos</a></td>
+</tr>
+<tr>
+<td>01/07/2025</td>
+<td>1.0</td>
+<td>Adiciona modelo relacional</td>
+<td><a href="https://github.com/Maelton">Maelton Lima dos Santos</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="descricao">Descrição</h2>
+<p>Este documento apresenta a modelagem relacional do banco de dados do sistema BRISA Helpdesk, com o objetivo de descrever a estrutura lógica das tabelas, suas relações, restrições e propósitos dentro da aplicação.</p>
+<p>Este documento será atualizado conforme novas entidades forem sendo adicionadas à base de dados e mudanças forem realizadas na estrutura existente.</p>
+<h2 id="modelagem-completa">Modelagem Completa</h2>
+<p><a href="../images/relational-model.svg"><img alt="" src="../images/relational-model.svg" /></a></p>
+<h2 id="principais-modulos-da-aplicacao">Principais Módulos da Aplicação</h2>
+<h3 id="1-gerenciamento-de-autenticacao">1 Gerenciamento de Autenticação</h3>
+<h4 id="11-modelo-conceitual">1.1 Modelo Conceitual</h4>
+<pre class="mermaid"><code>erDiagram
+    Usuario }o--o| Pergunta_Seguranca : pode_ter
+    Usuario }o--o{ Papel_no_Sitema : tem
+    Papel_no_Sitema }o--o{ Privilegio_de_Uso : tem
+    Usuario }o--o{ Servidor_oAuth : pode_autenticar_via
+    Usuario ||--o| Cliente : especializa
+    Usuario ||--o| Usuario_de_Cliente : especializa
+    Usuario ||--o| Colaborador : especializa
+    Cliente ||--o{ Usuario_de_Cliente : pode_ter</code></pre>
+<h4 id="12-descricao">1.2 Descrição</h4>
+<p>O módulo de Gerenciamento de Autenticação gerencia a autenticação e autorização de usuários no sistema BRISA Helpdesk. Ele suporta três tipos de usuários que podem fazer login: Client (clientes, especialização em tb_client), ClientUser (usuários vinculados a clientes, especialização em tb_client_user), e Employee (funcionários, especialização em tb_employee). </p>
+<p>O módulo inclui a gestão de credenciais de login, perguntas de segurança para recuperação de contas, papéis (roles) e privilégios para controle de acesso, além de suporte a autenticação via provedores OAuth2/OpenID Connect. Este módulo assegura acesso seguro e controlado às funcionalidades do sistema, com suporte a associações de papéis e permissões, bem como integração com provedores externos de autenticação.</p>
+<p>As principais entidades incluem:</p>
+<ul>
+<li><strong>Usuários (tb_user)</strong>: Armazena informações de autenticação dos usuários (Client, ClientUser, Employee), como nome de usuário, hash de senha e status da conta.</li>
+<li><strong>Perguntas de Segurança (tb_security_question)</strong>: Contém perguntas usadas para recuperação de contas, associadas a respostas criptografadas por usuário.</li>
+<li><strong>Papéis (tb_role)</strong>: Define os papéis do sistema que determinam níveis de acesso.</li>
+<li><strong>Privilégios (tb_privilege)</strong>: Armazena permissões atômicas associadas a papéis.</li>
+<li><strong>Provedores OAuth (tb_oauth_provider)</strong>: Configurações para autenticação via provedores externos, como Google ou Microsoft.</li>
+<li><strong>Associações de Usuários com Provedores OAuth (tb_user_oauth_provider)</strong>: Relaciona usuários a contas externas de autenticação.</li>
+<li><strong>Relações M:N</strong>: Incluem associações entre usuários e papéis (tb_user_role) e entre papéis e privilégios (tb_role_privilege).</li>
+<li><strong>Tipos de Usuários</strong>:<ul>
+<li><strong>Client</strong>: Representa clientes (pessoa física ou jurídica) registrados em tb_client.</li>
+<li><strong>ClientUser</strong>: Usuários vinculados a clientes, registrados em tb_client_user, com login próprio por cliente.</li>
+<li><strong>Employee</strong>: Funcionários da empresa, registrados em tb_employee.</li>
+</ul>
+</li>
+</ul>
+<h4 id="13-modelo-relacional">1.3 Modelo Relacional</h4>
+<p><a href="../images/authentication-module.svg"><img alt="" src="../images/authentication-module.svg" /></a></p>
+<h3 id="2-gerenciamento-de-produtos">2 Gerenciamento de Produtos</h3>
+<h4 id="21-modelo-conceitual">2.1 Modelo Conceitual</h4>
+<pre class="mermaid"><code>erDiagram
+    Item_de_Catalogo }o--|| Tipo : tem
+    Item_de_Catalogo ||--o| Produto : especializa
+    Item_de_Catalogo ||--o| Servico : especializa
+    Item_de_Catalogo }o--o{ Contrato : pode_estar_associado_a
+    Item_de_Catalogo }o--o{ SLA : pode_estar_associado_a</code></pre>
+<h4 id="22-descricao">2.2 Descrição</h4>
+<p>O módulo de Gerenciamento de Produtos é responsável por gerenciar os itens do catálogo do sistema BRISA Helpdesk, que incluem produtos e serviços oferecidos aos clientes. Ele organiza os itens do catálogo em tipos específicos e permite a especialização em produtos (físicos ou não) e serviços (físicos ou não). </p>
+<p>Este módulo é essencial para associar itens do catálogo a contratos (por meio da tabela tb_contract_catalog_item) e a acordos de nível de serviço (SLAs, por meio da tabela tb_sla_catalog_item), garantindo que os serviços e produtos disponíveis sejam corretamente classificados, rastreados e vinculados às obrigações contratuais e de atendimento do sistema.</p>
+<p>As principais entidades incluem:</p>
+<ul>
+<li><strong>CatalogItem (tb_catalog_item)</strong>: Tabela base que armazena informações gerais sobre itens do catálogo, como produtos e serviços.</li>
+<li><strong>CatalogItemType (tb_catalog_item_type)</strong>: Define os tipos de classificação para itens do catálogo (e.g., "Hardware", "Software", "Suporte Técnico").</li>
+<li><strong>Product (tb_product)</strong>: Especialização de CatalogItem que representa produtos, com a distinção de serem físicos ou não.</li>
+<li><strong>Service (tb_service)</strong>: Especialização de CatalogItem que representa serviços, com a distinção de serem físicos ou não.</li>
+<li><strong>Contract (tb_contract)</strong>: Representa contratos associados a clientes, que podem incluir múltiplos itens do catálogo.</li>
+<li><strong>SLA (tb_sla)</strong>: Define acordos de nível de serviço, que podem estar associados a itens do catálogo para especificar tempos de resposta e resolução.</li>
+</ul>
+<h4 id="23-modelo-relacional">2.3 Modelo Relacional</h4>
+<p><a href="../images/products-module.svg"><img alt="" src="../images/products-module.svg" /></a></p>
+<h3 id="3-gerenciamento-de-clientes">3 Gerenciamento de Clientes</h3>
+<h4 id="31-modelo-conceitual">3.1 Modelo Conceitual</h4>
+<pre class="mermaid"><code>erDiagram
+    Cliente }o--|| Tipo : tem
+    Cliente }o--|| Status : tem
+    Cliente }o--|| Endereco : tem
+    Cliente }o--|| Telefone : tem
+    Usuario ||--o| Cliente : especializa
+    Cliente ||--o| Cliente_CPF : especializa
+    Cliente ||--o| Cliente_CNPJ : especializa
+    Cliente ||--o{ Usuario_de_Cliente : associa
+    Usuario ||--o| Usuario_de_Cliente : especializa
+    Cliente }o--o{ Setor_de_Mercado : associado_a
+    Cliente }o--o{ Segmento_de_Mercado : associado_a
+    Cliente_CNPJ }o--|| CompanyCategory : tem</code></pre>
+<h4 id="32-descricao">3.2 Descrição</h4>
+<p>O módulo de Gerenciamento de Clientes é responsável por gerenciar as informações dos clientes no sistema BRISA Helpdesk, incluindo pessoas físicas (tb_individual_client) e jurídicas (tb_corporate_client), bem como usuários vinculados a clientes (tb_client_user). Ele categoriza os clientes por tipo, status, setores de negócios e segmentos, além de associar endereços e números de telefone. </p>
+<p>Este módulo permite o rastreamento detalhado de informações de contato, classificações de clientes e suas associações com setores e segmentos de negócios, garantindo uma gestão eficiente das relações com os clientes.</p>
+<p>As principais entidades incluem:</p>
+<ul>
+<li><strong>Client (tb_client)</strong>: Tabela base para todos os clientes, vinculada a um usuário (tb_user) e associada a um tipo, status, endereço e telefone.</li>
+<li><strong>ClientType (tb_client_type)</strong>: Define categorias de clientes (e.g., "Premium", "Standard").</li>
+<li><strong>ClientStatus (tb_client_status)</strong>: Define os status possíveis para clientes (e.g., "Ativo", "Inativo").</li>
+<li><strong>IndividualClient (tb_individual_client)</strong>: Especialização de Client para pessoas físicas, com informações como CPF e data de nascimento.</li>
+<li><strong>CorporateClient (tb_corporate_client)</strong>: Especialização de Client para empresas, com informações como CNPJ e razão social.</li>
+<li><strong>Address (tb_address)</strong>: Armazena informações de endereços físicos dos clientes.</li>
+<li><strong>Phone (tb_phone)</strong>: Armazena números de telefone associados aos clientes.</li>
+<li><strong>ClientUser (tb_client_user)</strong>: Representa usuários vinculados a clientes, com login próprio por cliente.</li>
+<li><strong>BusinessSector (tb_business_sector)</strong>: Define setores de negócios (e.g., "Tecnologia", "Varejo") associados a clientes.</li>
+<li><strong>BusinessSegment (tb_business_segment)</strong>: Define segmentos de negócios (e.g., "Software", "E-commerce") associados a clientes.</li>
+<li><strong>CompanyCategory (tb_company_category)</strong>: Define categorias de empresas com base no tamanho (número de funcionários).</li>
+</ul>
+<h4 id="33-modelo-relacional">3.3 Modelo Relacional</h4>
+<p><a href="../images/clients-module.svg"><img alt="" src="../images/clients-module.svg" /></a></p>
+<h3 id="4-gerenciamento-de-colaboradores">4 Gerenciamento de Colaboradores</h3>
+<h4 id="41-modelo-conceitual">4.1 Modelo Conceitual</h4>
+<pre class="mermaid"><code>erDiagram
+    Usuario ||--o| Colaborador : especializa
+    Colaborador }o--o| Telefone : pode_ter
+    Colaborador }o--o| Endereco : pode_ter
+    Colaborador }o--|| Cargo : ocupa
+    Colaborador }o--|| Status : tem
+    Colaborador }o--o| Departamento : pode_ter
+    Colaborador }o--o| Branch : pode_ter
+    Colaborador }o--o{ Horario_de_Trabalho : associado_a
+    Cargo }o--o{ JobSpecialization : pode_ter
+    Colaborador |o--o{ Colaborador : pode_supervisionar
+    Branch }o--|| Endereco : tem</code></pre>
+<h4 id="42-descricao">4.2 Descrição</h4>
+<p>O módulo de Gerenciamento de Colaboradores é responsável por gerenciar as informações dos funcionários (employees) do sistema BRISA Helpdesk. Ele inclui detalhes sobre cargos, especializações, departamentos, filiais, status dos funcionários, horários de trabalho e informações de contato, como endereços e telefones. </p>
+<p>Este módulo permite o rastreamento de hierarquias (supervisores), alocação de cargos e especializações, associação a departamentos e filiais, bem como a definição de horários de trabalho semanais, garantindo uma gestão eficiente dos recursos humanos da organização.</p>
+<p>As principais entidades incluem:</p>
+<ul>
+<li><strong>Employee (tb_employee)</strong>: Tabela base para funcionários, vinculada a um usuário (tb_user) e associada a cargos, departamentos, filiais, status e informações de contato.</li>
+<li><strong>JobPosition (tb_job_position)</strong>: Define os cargos disponíveis na organização (e.g., "Técnico de Suporte", "Gerente").</li>
+<li><strong>JobSpecialization (tb_job_specialization)</strong>: Define especializações que podem ser associadas a cargos (e.g., "Redes", "Segurança").</li>
+<li><strong>Department (tb_department)</strong>: Representa departamentos dentro da organização (e.g., "TI", "RH").</li>
+<li><strong>Branch (tb_branch)</strong>: Representa filiais da empresa, cada uma associada a um endereço.</li>
+<li><strong>EmployeeStatus (tb_employee_status)</strong>: Define os status possíveis para funcionários (e.g., "Ativo", "Demitido").</li>
+<li><strong>WorkSchedule (tb_work_schedule)</strong>: Define horários de trabalho semanais (e.g., dias da semana e horários).</li>
+<li><strong>User (tb_user)</strong>: Entidade de autenticação que Employee especializa, contendo credenciais de login.</li>
+<li><strong>Address (tb_address)</strong>: Armazena endereços físicos associados a funcionários e filiais.</li>
+<li><strong>Phone (tb_phone)</strong>: Armazena números de telefone associados aos funcionários.</li>
+</ul>
+<h4 id="43-modelo-relacional">4.3 Modelo Relacional</h4>
+<p><a href="../images/employees-module.svg"><img alt="" src="../images/employees-module.svg" /></a></p>
+<h3 id="5-gerenciamento-de-contratos">5 Gerenciamento de Contratos</h3>
+<h4 id="51-modelo-conceitual">5.1 Modelo Conceitual</h4>
+<pre class="mermaid"><code>erDiagram
+    Contrato }o--|| Status : tem
+    Contrato }o--|| Tipo : tem
+    Contrato }o--|| Cliente : tem
+    Contrato }o--o{ Produto_Servico : possui
+    Produto_Servico }o--o{ SLA : pode_ter
+    Contrato }o--o{ Usuario_de_Cliente : pode_estar_associado_a
+    Cliente ||--o{ Usuario_de_Cliente : pode_ter
+    Contrato }o--o{ SLA : pode_estar_associado_a</code></pre>
+<h4 id="52-descricao">5.2 Descrição</h4>
+<p>O módulo de Gerenciamento de Contratos é responsável por gerenciar os contratos associados aos clientes no sistema BRISA Helpdesk. Ele permite a criação, rastreamento e categorização de contratos, vinculando-os a clientes, usuários relacionados aos clientes (ClientUsers), itens do catálogo (produtos ou serviços) e acordos de nível de serviço (SLAs). </p>
+<p>Este módulo assegura a gestão eficiente das obrigações contratuais, incluindo status, tipos de contratos, associações com itens do catálogo e SLAs, além de permitir que usuários vinculados a clientes (ClientUsers) sejam associados a contratos para facilitar a gestão de interações.</p>
+<p>As principais entidades incluem:</p>
+<ul>
+<li><strong>Contract (tb_contract)</strong>: Tabela base para contratos, associada a um cliente, tipo de contrato, status, itens do catálogo, SLAs e usuários vinculados a clientes.</li>
+<li><strong>ContractStatus (tb_contract_status)</strong>: Define os status possíveis para contratos (e.g., "Ativo", "Cancelado").</li>
+<li><strong>ContractType (tb_contract_type)</strong>: Define os tipos de contratos (e.g., "Manutenção", "Suporte").</li>
+<li><strong>Client (tb_client)</strong>: Representa os clientes associados aos contratos.</li>
+<li><strong>ClientUser (tb_client_user)</strong>: Representa usuários vinculados a clientes, que podem ser associados a contratos para gerenciar interações específicas.</li>
+<li><strong>CatalogItem (tb_catalog_item)</strong>: Representa itens do catálogo (produtos ou serviços) vinculados aos contratos.</li>
+<li><strong>SLA (tb_sla)</strong>: Define acordos de nível de serviço, associados a itens do catálogo vinculados a contratos.</li>
+<li><strong>ContractCatalogItem (tb_contract_catalog_item)</strong>: Tabela de junção que associa contratos a itens do catálogo, permitindo múltiplos itens por contrato e múltiplos contratos por item.</li>
+</ul>
+<h4 id="53-modelo-relacional">5.3 Modelo Relacional</h4>
+<p><a href="../images/contracts-module.svg"><img alt="" src="../images/contracts-module.svg" /></a></p>
+<h3 id="6-gerenciamento-de-slas">6 Gerenciamento de SLAs</h3>
+<h4 id="61-modelo-conceitual">6.1 Modelo Conceitual</h4>
+<pre class="mermaid"><code>erDiagram
+    SLA }o--|| Status : tem
+    SLA }o--|| Tipo : tem
+    SLA }o--o{ Item_de_Catalogo : pode_estar_associada_a
+    SLA }o--o{ Contrato : pode_estar_associada_a
+    SLA }o--o{ Tipo_de_Chamado : pode_estar_associada_a
+    SLA ||--o{ Calendario : tem
+    Calendario }o--o{ Excecao : pode_ter</code></pre>
+<h4 id="62-descricao">6.2 Descrição</h4>
+<p>O módulo de Gerenciamento de SLAs é responsável por gerenciar os Acordos de Nível de Serviço (SLAs) no sistema BRISA Helpdesk. Ele permite a criação, rastreamento e categorização de SLAs, que definem os tempos de resposta e resolução para serviços ou produtos associados a contratos, itens do catálogo ou tipos de chamados. </p>
+<p>Os SLAs são vinculados a itens do catálogo (produtos ou serviços), contratos (indiretamente via itens do catálogo), e tipos de chamados para especificar os compromissos de atendimento. Cada SLA é associada a um calendário (tb_calendar) que define os períodos de operação, e esses calendários podem ter exceções (tb_calendar_exception) para feriados ou eventos específicos. </p>
+<p>Este módulo assegura a gestão eficiente dos acordos de nível de serviço, incluindo status, prioridades (definidas na tabela tb_sla_priority), associações com itens do catálogo, contratos, tipos de chamados e calendários.</p>
+<p>As principais entidades incluem:</p>
+<ul>
+<li><strong>SLA (tb_sla)</strong>: Tabela base para acordos de nível de serviço, associada a um status, prioridade, itens do catálogo, tipos de chamados, contratos (via itens do catálogo) e calendário.</li>
+<li><strong>SLAPriority (tb_sla_priority)</strong>: Define as prioridades de SLAs (e.g., "Alta", "Baixa"), anteriormente referida como tipo de SLA.</li>
+<li><strong>CatalogItem (tb_catalog_item)</strong>: Representa itens do catálogo (produtos ou serviços) que pode ser associados aos SLAs.</li>
+<li><strong>Contract (tb_contract)</strong>: Representa contratos associados a SLAs indiretamente via itens do catálogo ou que podem ser associados aos SLAs.</li>
+<li><strong>TicketType (tb_ticket_type)</strong>: Define tipos de chamados (e.g., "Incidente", "Solicitação") que podem ser associados aos SLAs.</li>
+<li><strong>Calendar (tb_calendar)</strong>: Define os períodos operacionais dos SLAs (e.g., horários de trabalho).</li>
+<li><strong>CalendarException (tb_calendar_exception)</strong>: Define exceções nos calendários, como feriados ou eventos específicos.</li>
+</ul>
+<h4 id="63-modelo-relacional">6.3 Modelo Relacional</h4>
+<p><a href="../images/sla-module.svg"><img alt="" src="../images/sla-module.svg" /></a></p>
+<h3 id="7-gerenciamento-de-chamados">7 Gerenciamento de Chamados</h3>
+<h4 id="71-modelo-conceitual">7.1 Modelo Conceitual</h4>
+<pre class="mermaid"><code>erDiagram
+    Chamado }o--|| SLA : tem
+    Chamado }o--|| Contrato : tem
+    Chamado }o--|| Cliente_do_Contrato : tem
+    Chamado }o--|| Solicitante : tem
+    Chamado }o--|| Produto_Servico : tem
+    Chamado }o--|| Tipo : tem
+    Chamado ||--o{ Anexo : pode_ter
+    Chamado ||--o{ Sessao : pode_ter
+
+    Sessao }o--|| Tipo : tem
+    Sessao }o--|| Status : tem
+    Sessao ||--o| Feedback : pode_ter
+    Sessao ||--o{ Atendimento : pode_ter
+
+    Atendimento }o--|| Agente : tem
+    Atendimento }o--|| Tipo_Atendimento : tem
+    Atendimento }o--|| Status : tem
+    Atendimento ||--o{ Chat : pode_ter
+    Atendimento ||--o{ FAQ : pode_ter</code></pre>
+<h4 id="72-descricao">7.2 Descrição</h4>
+<p>O módulo de Gerenciamento de Chamados é responsável por gerenciar os chamados (tickets) no sistema BRISA Helpdesk. Ele permite a criação, rastreamento e resolução de chamados, associando-os a clientes, usuários vinculados a clientes (ClientUsers), funcionários, SLAs, itens do catálogo e anexos. Cada chamado pode ter múltiplas sessões (tb_session), que representam interações contínuas para resolução. </p>
+<p>Cada sessão pode ter um atendimento (tb_interaction), que é classificado por um tipo de interação (e.g., "Telefone", "E-mail"). Um atendimento pode, opcionalmente, estar associado a um chat (tb_chat), uma FAQ (tb_faq) ou ambos, mas também pode não ter nenhum dos dois. </p>
+<p>Este módulo assegura a gestão eficiente dos chamados, incluindo status, tipos, associações com SLAs, itens do catálogo, sessões, atendimentos e anexos.</p>
+<h4 id="73-modelo-relacional">7.3 Modelo Relacional</h4>
+<p><a href="../images/ticketing-module.svg"><img alt="" src="../images/ticketing-module.svg" /></a>
+As relações foram extramamente reduzidas, observe as foreign keys para ter maior precisão.</p>
+<h3 id="8-gerenciamento-de-chats">8 Gerenciamento de Chats</h3>
+<h4 id="81-modelo-conceitual">8.1 Modelo Conceitual</h4>
+<pre class="mermaid"><code>erDiagram
+    Chat }o--|| Status : tem
+    Chat }o--|| Atendimento : tem
+    Chat ||--o{ Mensagem : pode_ter
+    Mensagem }o--|| Usuario : tem
+    Mensagem ||--o{ Anexo : pode_ter</code></pre>
+<h4 id="82-descricao">8.2 Descrição</h4>
+<p>O módulo de Gerenciamento de Chats é responsável por gerenciar as conversas de chat no sistema BRISA Helpdesk, que ocorrem como parte de atendimentos (tb_ticket_handling) associados a chamados (tickets). Os chats são vinculados a interações específicas, que por sua vez estão relacionadas a sessões de chamados. </p>
+<p>Este módulo assegura a gestão eficiente das conversas, permitindo o rastreamento de interações de suporte e a associação com os respectivos chamados e usuários.</p>
+<h4 id="83-modelo-relacional">8.3 Modelo Relacional</h4>
+<p><a href="../images/chat-module.svg"><img alt="" src="../images/chat-module.svg" /></a></p>
+<h3 id="9-gerenciamento-de-base-de-conhecimento">9 Gerenciamento de Base de Conhecimento</h3>
+<h4 id="91-modelo-conceitual">9.1 Modelo Conceitual</h4>
+<pre class="mermaid"><code>erDiagram
+    FAQ }o--|| Artigo : tem
+    Artigo }o--o{ Categoria : pode_ter
+    Artigo }o--o{ Tag : pode_ter
+</code></pre>
+<h4 id="92-descricao">9.2 Descrição</h4>
+<p>O módulo de Gerenciamento de FAQ (Base de Conhecimento) é responsável por gerenciar as perguntas frequentes (FAQs) no sistema BRISA Helpdesk, que compõem a base de conhecimento utilizada para suporte e resolução de chamados. </p>
+<p>As FAQs são organizadas por categorias e podem ser referenciadas em atendimentos (tb_ticket_handling) associados a sessões de chamados. Cada FAQ pode ser criada ou atualizada por usuários. </p>
+<p>Este módulo assegura a gestão eficiente do conhecimento, permitindo o rastreamento de FAQs, suas categorias e associações com atendimentos em chamados.</p>
+<h4 id="93-modelo-relacional">9.3 Modelo Relacional</h4>
+<p><a href="../images/faq-module.svg"><img alt="" src="../images/faq-module.svg" /></a></p>
+<h3 id="10-gerenciamento-de-feedback">10 Gerenciamento de Feedback</h3>
+<h4 id="101-modelo-conceitual">10.1 Modelo Conceitual</h4>
+<pre class="mermaid"><code>erDiagram
+    Feedback_de_Sessao |o--|| Usuario : tem
+    Feedback_de_Sessao |o--|| Valor_de_Avaliacao : tem
+    Feedback_de_Sessao |o--|| Sessao_de_Chamado : tem
+</code></pre>
+<h4 id="102-descricao">10.2 Descrição</h4>
+<p>O módulo de Gerenciamento de Feedback é responsável por gerenciar os feedbacks fornecidos por usuários no sistema BRISA Helpdesk. Os feedbacks são associados às sessões de chamado e permitem que solicitantes avaliem a qualidade do atendimento ou serviço prestado. </p>
+<p>Este módulo assegura a coleta e rastreamento de avaliações, vinculando-as aos respectivos chamados e usuários, para melhorar a experiência do cliente e a eficiência do suporte.</p>
+<h4 id="103-modelo-relacional">10.3 Modelo Relacional</h4>
+<p><a href="../images/feedback-module.svg"><img alt="" src="../images/feedback-module.svg" /></a></p>
+<h3 id="11-gerenciamento-de-auditoria">11 Gerenciamento de Auditoria</h3>
+<h4 id="111-modelo-conceitual">11.1 Modelo Conceitual</h4>
+<pre class="mermaid"><code>erDiagram
+    Auditoria |o--|| Tabela : tem
+    Auditoria |o--|| Coluna : tem
+    Auditoria |o--|| Identificador_de_Registro : tem
+    Auditoria |o--|| Valor_Anterior : tem
+    Auditoria |o--|| Novo_Valor : tem
+    Auditoria |o--|| Responsavel : tem
+    Auditoria |o--|| Data : tem    </code></pre>
+<h4 id="112-descricao">11.2 Descrição</h4>
+<p>O módulo de Gerenciamento de Auditoria é responsável por gerenciar os registros de auditoria no sistema BRISA Helpdesk. Ele rastreia as ações realizadas por usuários. </p>
+<p>Os registros de auditoria (tb_general_audit) capturam eventos relacionados a alterações ou exclusões no sistema, associados a um usuário específico, garantindo transparência e rastreabilidade das operações. </p>
+<p>Este módulo assegura a gestão eficiente dos logs de auditoria, permitindo monitorar atividades realizadas por diferentes tipos de usuários.</p>
+<h4 id="113-modelo-relacional">11.3 Modelo Relacional</h4>
+<p><a href="../images/audit-module.svg"><img alt="" src="../images/audit-module.svg" /></a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>
